@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Realistic Prop Phone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="modal-backdrop" onclick="closeModals()"></div>
+
+    <div id="time-modal" class="bottom-modal">
+        <div class="handle"></div>
+        <h4 style="margin-bottom:15px;">System Settings</h4>
+        <div class="setting-row">
+            <label>Set Time</label>
+            <div class="wheel-box">
+                <select id="h-wheel"></select>
+                <select id="m-wheel"></select>
+                <select id="p-wheel"><option>AM</option><option>PM</option></select>
+            </div>
+        </div>
+        <div class="setting-row">
+            <label>Battery: <span id="batt-preview">100%</span></label>
+            <input type="range" id="batt-range" min="1" max="100" value="100" oninput="document.getElementById('batt-preview').innerText = this.value + '%'">
+        </div>
+        <button class="apply-btn" onclick="applySystem()">APPLY CHANGES</button>
+    </div>
+
+    <div id="manager-modal" class="bottom-modal">
+        <div class="handle"></div>
+        <h4>App Visibility</h4>
+        <div id="app-ctrl-list"></div>
+        <button class="apply-btn" style="background:#444;" onclick="closeModals()">CLOSE</button>
+    </div>
+
+    <div id="phone-screen">
+        <div class="vignette"></div>
+
+        <div class="status-bar">
+            <div class="sb-left" onclick="openTimeModal()">
+                <span id="display-time">12:00 PM</span>
+            </div>
+            <div class="sb-right" onclick="openManagerModal()">
+                <div class="signal-group">
+                    <div class="s-bar"></div><div class="s-bar"></div><div class="s-bar"></div><div class="s-bar dead"></div>
+                    <span class="no-svc">✕</span>
+                </div>
+                <div class="battery-group">
+                    <span id="display-batt">100%</span>
+                    <div class="batt-shell"><div id="batt-level"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-grid" id="main-grid"></div>
+
+        <div id="app-window">
+            <div class="exit-btn" onclick="closeApp()">✕</div>
+            <div id="app-content">
+                <iframe id="app-frame"></iframe>
+                <div id="game-internal" class="white-screen">
+                    <div id="reg-view">
+                        <h1 class="orbit">ENTRY SYSTEM</h1>
+                        <input type="number" id="p-code" placeholder="00000">
+                        <button onclick="startInternalGame()">REGISTER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
